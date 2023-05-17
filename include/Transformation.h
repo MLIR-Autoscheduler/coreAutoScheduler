@@ -9,19 +9,25 @@
 //===----------------------------------------------------------------------===//
 #pragma once
 #include "CodeIR.h"
+#include <list>
 
 class Transformation{
     private:
     
     public:
         //virtual ~Transformation(){};
-        /// A function that applies a transformation to the provided CodeIR object.
+        /// Applies a transformation to the provided CodeIR object.
         /// It takes a CodeIR object as input.
         virtual void applyTransformation(CodeIR CodeIr){}
 
-        /// A function that checks whether the transformation is legal on given CodeIR 
+        /// Checks whether the transformation is legal on given CodeIR 
         /// object.
-        /// It returns a boolean value that indicates whether the transformation is legal.
+        /// It returns a boolean value that indicates whether the transformation
+        /// is legal.
         bool isLegal(CodeIR CodeIr);
-        // createCandidates(CodeIR CodeIr);
+
+        /// Creates a list of transformation candidates for the given CodeIR object.
+        /// Returns a list of Transformation pointers representing the transformation
+        /// candidates.
+        virtual std::list<Transformation*> createCandidates(CodeIR* CodeIr);
 };

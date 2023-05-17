@@ -23,13 +23,15 @@ class CodeIR {
         // CodeIR(void* Ir);
 
 
-        /// A function that sets the Ir  variable to the given value.
+        /// Sets the Ir  variable to the given value.
         /// It takes a void* parameter.
         void setIr(void* Ir);
 
-        /// A function that returns a unique_ptr to an object of type mlir::ModuleOp.
+        /// Returns a unique_ptr to an object of type mlir::ModuleOp.
         /// This presumably contains the representation of the code stored in Ir.
         void* getIr();
 
-        CodeIR* cloneIr();
+        /// Creates a clone of the CodeIR object.
+        /// Returns a pointer to the newly created clone.
+        virtual CodeIR* cloneIr();
 };

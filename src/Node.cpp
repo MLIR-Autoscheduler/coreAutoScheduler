@@ -15,9 +15,9 @@ Node::Node(CodeIR* CodeIr){
     this->TransformedCodeIr = CodeIr;
 }
 
-Node::Node(std::list<Transformation> TransformationList,CodeIR CodeIr,Transformation* TransformationApplied){
+Node::Node(std::list<Transformation> TransformationList, CodeIR* CodeIr, Transformation* TransformationApplied){
     this->TransformationList = TransformationList;
-    this->TransformedCodeIr = (CodeIR *)CodeIr.cloneIr();
+    this->TransformedCodeIr = (MLIRCodeIR*)CodeIr->cloneIr();
     this->TransformationApplied = TransformationApplied;
 }
 
@@ -27,9 +27,7 @@ void Node::applyTransformation(){
 }
 
 void Node::createChild(Node* node){
-
     ChildrenNodes.push_back(node);
-
 }
 
 void Node::removeChild(Node* node){

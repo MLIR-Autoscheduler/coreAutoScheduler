@@ -10,6 +10,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "Transformation.h"
+#include "MLIRCodeIR.h"
 #pragma once
 #include <list>
 
@@ -23,7 +24,7 @@ class Node{
     public:
         Node(CodeIR* CodeIr);
         // Constructor with parameters for the transformation list, code IR, and current transformation
-        Node(std::list<Transformation> TransformationList,CodeIR CodeIr,Transformation* TransformationApplied);
+        Node(std::list<Transformation> TransformationList,CodeIR* CodeIr,Transformation* TransformationApplied);
 
         void applyTransformation();
 
