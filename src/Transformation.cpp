@@ -15,6 +15,6 @@ bool Transformation::isLegal(CodeIR CodeIr){
     return true;
 }
 
-std::list<Transformation*> Transformation::createCandidates(CodeIR* CodeIr){
+std::vector<Transformation*> Transformation::createCandidates(CodeIR* CodeIr){
 
 }

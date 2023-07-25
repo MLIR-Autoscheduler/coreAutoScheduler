@@ -15,7 +15,7 @@ Node::Node(CodeIR* CodeIr){
     this->TransformedCodeIr = CodeIr;
 }
 
-Node::Node(std::list<Transformation> TransformationList, CodeIR* CodeIr, Transformation* TransformationApplied){
+Node::Node(std::vector<Transformation*> TransformationList, CodeIR* CodeIr, Transformation* TransformationApplied){
     this->TransformationList = TransformationList;
     this->TransformedCodeIr = (MLIRCodeIR*)CodeIr->cloneIr();
     this->TransformationApplied = TransformationApplied;
@@ -30,26 +30,45 @@ void Node::createChild(Node* node){
     ChildrenNodes.push_back(node);
 }
 
+void Node::addTransformation(Transformation* transformation){
+    TransformationList.push_back(transformation);
+}
+
+void Node::printSchedule(std::ostringstream& outputStringStream) {
+   
+    outputStringStream << "{ \"transformationList\" : \"";
+    for (const auto& transformation : TransformationList) {
+        outputStringStream << transformation->printTransformation();
+    }
+    outputStringStream << "\", \"evaluation\" : \"" << this->getEvaluation();
+
+    outputStringStream << "\", \"ChildrenList\" : [";
+    for (auto node : ChildrenNodes){
+        node->printSchedule(outputStringStream);
+    }
+    outputStringStream << "]},\n";
+}
+
 void Node::removeChild(Node* node){
 
 }
 // Getter for TransformationList
-std::list<Transformation> Node::getTransformationList() {
+std::vector<Transformation*> Node::getTransformationList() {
     return TransformationList;
 }
 
 // Setter for TransformationList
-void Node::setTransformationList(std::list<Transformation>& list) {
+void Node::setTransformationList(std::vector<Transformation*>& list) {
     TransformationList = list;
 }
 
 // Getter for ChildrenNodesy
-std::list<Node*> Node::getChildrenNodes() {
+SmallVector<Node* , 2> Node::getChildrenNodes() {
     return ChildrenNodes;
 }
 
 // Setter for ChildrenNodesy
-void Node::setChildrenNodes(std::list<Node*>& nodes) {
+void Node::setChildrenNodes(SmallVector<Node* , 2>& nodes) {
     ChildrenNodes = nodes;
 }
 
@@ -74,11 +93,11 @@ void Node::setTransformation(Transformation* transformation) {
 }
 
 // Getter for Evaluation
-float Node::getEvaluation() {
+double Node::getEvaluation() {
     return Evaluation;
 }
 
 // Setter for Evaluation
-void Node::setEvaluation(float value) {
+void Node::setEvaluation(double value) {
     Evaluation = value;
 }

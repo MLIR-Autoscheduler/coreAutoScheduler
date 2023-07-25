@@ -13,35 +13,40 @@
 #include "MLIRCodeIR.h"
 #pragma once
 #include <list>
+#include <fstream>
 
 class Node{
     private:
-        std::list<Transformation> TransformationList; // list of transformations applied
-        std::list<Node*> ChildrenNodes; // list of child nodes
+        std::vector<Transformation*> TransformationList; // list of transformations applied
+        SmallVector<Node*, 2> ChildrenNodes; // list of child nodes
         CodeIR* TransformedCodeIr; // code IR after transformation
         Transformation* TransformationApplied; // current transformation applied
-        float Evaluation; // evaluation score of the node
+        double Evaluation; // evaluation score of the node
     public:
         Node(CodeIR* CodeIr);
         // Constructor with parameters for the transformation list, code IR, and current transformation
-        Node(std::list<Transformation> TransformationList,CodeIR* CodeIr,Transformation* TransformationApplied);
+        Node(std::vector<Transformation*> TransformationList,CodeIR* CodeIr,Transformation* TransformationApplied);
 
         void applyTransformation();
 
         void createChild(Node* node);
 
         void removeChild(Node* node);
+
+        void addTransformation(Transformation* transformation);
+
+        void printSchedule(std::ostringstream& outputStringStream);
         // Getter for TransformationList
-        std::list<Transformation> getTransformationList();
+        std::vector<Transformation*> getTransformationList();
 
         // Setter for TransformationList
-        void setTransformationList(std::list<Transformation>& list);
+        void setTransformationList(std::vector<Transformation*>& list);
 
         // Getter for ChildrenNodes
-        std::list<Node*> getChildrenNodes();
+        SmallVector<Node*, 2> getChildrenNodes();
 
         // Setter for ChildrenNodes
-        void setChildrenNodes(std::list<Node*>& nodes);
+        void setChildrenNodes(SmallVector<Node*, 2>& nodes);
 
         // Getter for TransformedCodeIr
         CodeIR* getTransformedCodeIr();
@@ -56,9 +61,9 @@ class Node{
         void setTransformation(Transformation* transformation);
 
         // Getter for Evaluation
-        float getEvaluation();
+        double getEvaluation();
 
         // Setter for Evaluation
-        void setEvaluation(float value);
+        void setEvaluation(double value);
 
 };
