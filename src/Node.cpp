@@ -2,102 +2,132 @@
 //
 ///===----------------------------------------------------------------------===//
 //
-/// \file 
+/// \file
 /// This file contains the declaration of the Node class, which is the
-/// base class for the graph class. A Node represents a Transformation applied 
+/// base class for the graph class. A Node represents a Transformation applied
 /// on CodeIR.
 ///
 //===----------------------------------------------------------------------===//
 
 #include "Node.h"
 
-Node::Node(CodeIR* CodeIr){
+Node::Node(CodeIR *CodeIr)
+{
     this->TransformedCodeIr = CodeIr;
 }
 
-Node::Node(std::vector<Transformation*> TransformationList, CodeIR* CodeIr, Transformation* TransformationApplied){
+Node::Node(std::vector<Transformation *> TransformationList, CodeIR *CodeIr, Transformation *TransformationApplied)
+{
     this->TransformationList = TransformationList;
-    this->TransformedCodeIr = (MLIRCodeIR*)CodeIr->cloneIr();
+    this->TransformedCodeIr = (MLIRCodeIR *)CodeIr->cloneIr();
     this->TransformationApplied = TransformationApplied;
 }
 
-/// Applies the transformation on the codeIr 
-void Node::applyTransformation(){
+/// Applies the transformation on the codeIr
+void Node::applyTransformation()
+{
     TransformationApplied->applyTransformation(*(TransformedCodeIr));
 }
 
-void Node::createChild(Node* node){
+void Node::createChild(Node *node)
+{
     ChildrenNodes.push_back(node);
 }
 
-void Node::addTransformation(Transformation* transformation){
+void Node::addTransformation(Transformation *transformation)
+{
     TransformationList.push_back(transformation);
 }
 
-void Node::printSchedule(std::ostringstream& outputStringStream) {
-   
+void Node::printSchedule(std::ostringstream &outputStringStream)
+{
     outputStringStream << "{ \"transformationList\" : \"";
-    for (const auto& transformation : TransformationList) {
+    for (const auto &transformation : TransformationList)
+    {
         outputStringStream << transformation->printTransformation();
     }
+ 
     outputStringStream << "\", \"evaluation\" : \"" << this->getEvaluation();
 
     outputStringStream << "\", \"ChildrenList\" : [";
-    for (auto node : ChildrenNodes){
-        node->printSchedule(outputStringStream);
+    if (!ChildrenNodes.empty())
+    {
+        auto lastNode = ChildrenNodes.back();
+        outputStringStream << "\n";
+        for (auto node : ChildrenNodes)
+        {
+            node->printSchedule(outputStringStream);
+            if (node != lastNode)
+            {
+                outputStringStream << "]},\n";
+            }
+            else
+            {
+                outputStringStream << "]}\n";
+            }
+        }
     }
-    outputStringStream << "]},\n";
 }
 
-void Node::removeChild(Node* node){
-
+void Node::removeChild(Node *node)
+{
 }
 // Getter for TransformationList
-std::vector<Transformation*> Node::getTransformationList() {
+std::vector<Transformation *> Node::getTransformationList()
+{
     return TransformationList;
 }
 
 // Setter for TransformationList
-void Node::setTransformationList(std::vector<Transformation*>& list) {
+void Node::setTransformationList(std::vector<Transformation *> &list)
+{
     TransformationList = list;
 }
 
 // Getter for ChildrenNodesy
-SmallVector<Node* , 2> Node::getChildrenNodes() {
+SmallVector<Node *, 2> Node::getChildrenNodes()
+{
     return ChildrenNodes;
 }
 
 // Setter for ChildrenNodesy
-void Node::setChildrenNodes(SmallVector<Node* , 2>& nodes) {
+void Node::setChildrenNodes(SmallVector<Node *, 2> &nodes)
+{
     ChildrenNodes = nodes;
 }
 
 // Getter for TransformedCodeIr
-CodeIR* Node::getTransformedCodeIr() {
+CodeIR *Node::getTransformedCodeIr()
+{
     return TransformedCodeIr;
 }
 
 // Setter for TransformedCodeIr
-void Node::setTransformedCodeIr(CodeIR* code) {
+void Node::setTransformedCodeIr(CodeIR *code)
+{
     TransformedCodeIr = code;
 }
 
 // Getter for Transformation
-Transformation* Node::getTransformation() {
+Transformation *Node::getTransformation()
+{
     return TransformationApplied;
 }
 
 // Setter for Transformation
-void Node::setTransformation(Transformation* transformation) {
+void Node::setTransformation(Transformation *transformation)
+{
     TransformationApplied = transformation;
 }
 
 // Getter for Evaluation
-double Node::getEvaluation() {
+std::string Node::getEvaluation()
+{
     return Evaluation;
 }
 
 // Setter for Evaluation
-void Node::setEvaluation(double value) {
+void Node::setEvaluation(std::string value)
+{
     Evaluation = value;
 }
