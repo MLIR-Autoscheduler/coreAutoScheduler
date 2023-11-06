@@ -9,7 +9,7 @@
 //===----------------------------------------------------------------------===//
 
 #include "CodeIR.h" 
-
+#include <iostream>
 
 // CodeIR::CodeIR(void* Ir){
 //     this->Ir = Ir;
@@ -22,7 +22,7 @@ void* CodeIR::getIr(){
     }    
 }
 
-void CodeIR::setIr(void* Ir){
+void CodeIR::setIr(void* Ir){  
     if(Ir != NULL){
         this->Ir = Ir;
     }
