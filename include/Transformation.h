@@ -32,4 +32,6 @@ class Transformation{
         /// Returns a list of Transformation pointers representing the transformation
         /// candidates.
         virtual std::vector<Transformation*> createCandidates(CodeIR* CodeIr);
+
+        virtual std::string getType();
 };

@@ -18,3 +18,7 @@ bool Transformation::isLegal(CodeIR CodeIr){
 std::vector<Transformation*> Transformation::createCandidates(CodeIR* CodeIr){
 
 }
+
+std::string Transformation::getType(){
+    return "Base";
+}
