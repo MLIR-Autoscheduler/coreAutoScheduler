@@ -21,7 +21,7 @@ class Transformation{
         /// Applies a transformation to the provided CodeIR object.
         /// It takes a CodeIR object as input.
         virtual void applyTransformation(CodeIR CodeIr){}
-        virtual std::string printTransformation(){}
+        virtual std::string printTransformation();
         /// Checks whether the transformation is legal on given CodeIR 
         /// object.
         /// It returns a boolean value that indicates whether the transformation

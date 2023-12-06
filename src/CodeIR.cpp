@@ -17,9 +17,7 @@
 
 
 void* CodeIR::getIr(){
-    if (this->Ir != NULL){
-        return (this->Ir);
-    }    
+        return (this->Ir); 
 }
 
 void CodeIR::setIr(void* Ir){  
