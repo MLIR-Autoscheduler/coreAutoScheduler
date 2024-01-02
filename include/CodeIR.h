@@ -7,7 +7,8 @@
 /// code representation and its manipulations
 ///
 //===----------------------------------------------------------------------===//
-#pragma once
+#ifndef SCHEDULER_INFRASTRUCTURE_CODEIR_H_
+#define SCHEDULER_INFRASTRUCTURE_CODEIR_H_
 
 #include <cstddef>
 
@@ -35,3 +36,5 @@ class CodeIR {
         /// Returns a pointer to the newly created clone.
         virtual CodeIR* cloneIr();
 };
+
+#endif // SCHEDULER_INFRASTRUCTURE_CODEIR_H_

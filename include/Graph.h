@@ -7,15 +7,15 @@
 /// 
 ///
 //===----------------------------------------------------------------------===//
+#ifndef SCHEDULER_INFRASTRUCTURE_GRAPH_H_
+#define SCHEDULER_INFRASTRUCTURE_GRAPH_H_
 
 #include "Node.h"
-
-#pragma once
 #include <list>
 
 class Graph{
     private:
         Node* RootNode;
-    public:
-
 }
+
+#endif // SCHEDULER_INFRASTRUCTURE_GRAPH_H_

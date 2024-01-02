@@ -8,10 +8,12 @@
 /// on CodeIR.
 ///
 //===----------------------------------------------------------------------===//
+#ifndef SCHEDULER_INFRASTRUCTURE_NODE_H_
+#define SCHEDULER_INFRASTRUCTURE_NODE_H_
 
 #include "Transformation.h"
 #include "MLIRCodeIR.h"
-#pragma once
+
 #include <list>
 #include <fstream>
 
@@ -67,3 +69,5 @@ class Node{
         void setEvaluation(std::string  value);
 
 };
+
+#endif // SCHEDULER_INFRASTRUCTURE_NODE_H_

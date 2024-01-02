@@ -7,7 +7,9 @@
 /// base for all transformations used in the auto scheduler.
 ///
 //===----------------------------------------------------------------------===//
-#pragma once
+#ifndef SCHEDULER_INFRASTRUCTURE_TRANSFORMATION_H_
+#define SCHEDULER_INFRASTRUCTURE_TRANSFORMATION_H_
+
 #include "CodeIR.h"
 #include <vector>
 #include <string>
@@ -35,3 +37,5 @@ class Transformation{
 
         virtual std::string getType();
 };
+
+#endif // SCHEDULER_INFRASTRUCTURE_TRANSFORMATION_H_
