@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.13.4)
 
 # Define the project and its properties
-project(autoSchedulerInfrastructure LANGUAGES CXX C)
+project(coreAutoScheduler LANGUAGES CXX C)
 
 # Add the include directories
 include_directories(include)
@@ -12,4 +12,4 @@ include_directories(include)
 file(GLOB SOURCES "src/*.cpp")
 
 # Add the library
-add_library(autoSchedulerInfrastructure STATIC ${SOURCES})
+add_library(coreAutoScheduler STATIC ${SOURCES})

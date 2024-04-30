@@ -24,8 +24,9 @@ class Node{
         CodeIR* TransformedCodeIr; // code IR after transformation
         Transformation* TransformationApplied; // current transformation applied
         std::string Evaluation; // evaluation score of the node
+        int CurrentStage;
     public:
-        Node(CodeIR* CodeIr);
+        Node(CodeIR *CodeIr, int stage);
         // Constructor with parameters for the transformation list, code IR, and current transformation
         Node(std::vector<Transformation*> TransformationList,CodeIR* CodeIr,Transformation* TransformationApplied);
 
@@ -67,6 +68,11 @@ class Node{
 
         // Setter for Evaluation
         void setEvaluation(std::string  value);
+        // Getter for CurrentStage
+        int  getCurrentStage();
+
+        // Setter for CurrentStage
+        void setCurrentStage(int  stage);
 
 };
 

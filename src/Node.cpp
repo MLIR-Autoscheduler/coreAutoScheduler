@@ -11,9 +11,10 @@
 
 #include "Node.h"
 
-Node::Node(CodeIR *CodeIr)
+Node::Node(CodeIR *CodeIr, int stage)
 {
     this->TransformedCodeIr = CodeIr;
+    this->CurrentStage = stage;
 }
 
 Node::Node(std::vector<Transformation *> TransformationList, CodeIR *CodeIr, Transformation *TransformationApplied)
@@ -21,6 +22,7 @@ Node::Node(std::vector<Transformation *> TransformationList, CodeIR *CodeIr, Tra
     this->TransformationList = TransformationList;
     this->TransformedCodeIr = (MLIRCodeIR *)CodeIr->cloneIr();
     this->TransformationApplied = TransformationApplied;
+    this->CurrentStage = 0;
 }
 
 /// Applies the transformation on the codeIr
@@ -130,4 +132,13 @@ std::string Node::getEvaluation()
 void Node::setEvaluation(std::string value)
 {
     Evaluation = value;
+}
+
+// Getter for CurrentStage
+int Node::getCurrentStage(){
+    return CurrentStage;
+}
+// Setter for CurrentStage
+void Node::setCurrentStage(int  stage){
+    CurrentStage = stage;
 }
